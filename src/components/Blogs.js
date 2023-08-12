@@ -3,51 +3,54 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserInput, setBlogData } from "../features/userSlice";
 
-import "../styling/blog.css";
+import "../styling/blogs.css";
 
 const Blogs = () => {
   const searchInput = useSelector(selectUserInput);
-  const blog_url = `https://gnews.io/api/v4/search?q=${searchInput}&token=8aa64a2b046f8492a0427a6d7b75bbd0`;
+  // const url = `https://gnews.io/api/v4/search?q=${searchInput}&token=becee10f0261f6756adbf65937d21936`;
+  const apiKey = process.env.REACT_APP_API_KEY; 
+  const url = `https://gnews.io/api/v4/search?q=${searchInput}&token=${apiKey}`;
   const dispatch = useDispatch();
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState();
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get(blog_url)
+      .get(url)
       .then((response) => {
         dispatch(setBlogData(response.data));
-        setBlogs(response.data.articles);
+        setBlogs(response.data);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
       });
   }, [searchInput]);
 
   return (
     <div className="blog__page">
       <h1 className="blog__page__header">Blogs</h1>
-      {loading ? <h1 className="loading">Loading...</h1> : null}
-      <div className="blog__grid">
-        {blogs.map((blog, index) => (
-          <a key={index} className="blog__item" target="_blank" href={blog.url}>
-            <img src={blog.image} alt={blog.title} />
-            <div className="blog__content">
+      {loading ? <h1 className="loading">Loading...</h1> : ""}
+      <div className="blogs">
+        {blogs?.articles?.map((blog) => (
+          <a className="blog" target="_blank" href={blog.url}>
+            <img src={blog.image} />
+            <div>
               <h3 className="sourceName">
                 <span>{blog.source.name}</span>
                 <p>{blog.publishedAt}</p>
               </h3>
-              <h2>{blog.title}</h2>
+              <h1>{blog.title}</h1>
               <p>{blog.description}</p>
             </div>
           </a>
         ))}
-        {blogs.length === 0 && (
+
+        {blogs?.totalArticles == 0 && (
           <h1 className="no__blogs">
-            No blogs available 😞. Search for something else to read blogs on
-            the greatest platform.
+            No blogs available 😞. Search something else to read blogs on the
+            greatest platform.
           </h1>
         )}
       </div>
