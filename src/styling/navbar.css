@@ -6,13 +6,21 @@
   padding: 0px 80px;
   background: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  background: #5b5b5e;
+  background: #8f8fec;
   color: white;
 }
 
 .navbar__header {
   font-size: 20px;
   font-weight: 700;
+  letter-spacing: -1px;
+  cursor: pointer;
+}
+.navbar__header:hover{
+  text-decoration: underline;
+  font-size: 30px;
+  color: rgb(20, 18, 19);
+
 }
 
 .navbar__user__data {
@@ -45,7 +53,7 @@
 }
 
 .notSignedIn {
-  font-size: 15px;
+  font-size: 25px;
 }
 
 .blog__search {
@@ -57,6 +65,7 @@
   justify-content: space-between;
   background: rgb(39, 39, 39);
   border-radius: 5px;
+  font-size: 25px;
 }
 
 .search {
@@ -76,18 +85,18 @@
   font-family: "Inter";
   background: none;
   color: white;
-  font-size: 14px;
+  font-size: 20px;
   border: none;
   cursor: pointer;
   margin-right: 10px;
   padding: 12px 0px;
   border-radius: 5px;
   transition: 0.1s ease-in-out;
-  background: rgb(31, 31, 31);
+  background: rgb(105, 104, 104);
   outline: none;
 }
 
 .submit:hover {
-  background: rgb(181, 173, 173);
+  background: rgb(237, 234, 234);
   color: rgb(22, 22, 22);
   }
