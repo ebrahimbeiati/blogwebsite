@@ -7,7 +7,6 @@ import "../styling/blogs.css";
 
 const Blogs = () => {
   const searchInput = useSelector(selectUserInput);
-  // const url = `https://gnews.io/api/v4/search?q=${searchInput}&token=becee10f0261f6756adbf65937d21936`;
   const apiKey = process.env.REACT_APP_API_KEY; 
   const url = `https://gnews.io/api/v4/search?q=${searchInput}&token=${apiKey}`;
   const dispatch = useDispatch();
